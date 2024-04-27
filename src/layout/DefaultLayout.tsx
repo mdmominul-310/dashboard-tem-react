@@ -21,6 +21,7 @@ import InboxIcon from '@mui/icons-material/MoveToInbox';
 import MailIcon from '@mui/icons-material/Mail';
 import { projectColors } from '../config/colors';
 import AccountMenu from '../component/dashhboar-headers/AccountMenu';
+import { Outlet } from 'react-router-dom';
 
 const drawerWidth = 240;
 
@@ -193,7 +194,7 @@ export default function DefaultLayout() {
             <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
                 <DrawerHeader />
 
-
+                <Outlet />
             </Box>
         </Box>
     );
