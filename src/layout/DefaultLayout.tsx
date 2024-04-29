@@ -19,9 +19,13 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import InboxIcon from '@mui/icons-material/MoveToInbox';
 import MailIcon from '@mui/icons-material/Mail';
-import { projectColors } from '../config/colors';
+
 import AccountMenu from '../component/dashhboar-headers/AccountMenu';
 import { Outlet } from 'react-router-dom';
+import { DarkModeOutlined, LightModeOutlined } from '@mui/icons-material';
+import { ColorModeContext } from '../App';
+import { colors } from '@mui/material';
+
 
 const drawerWidth = 240;
 
@@ -94,10 +98,11 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
     }),
 );
 
-export default function DefaultLayout() {
+function DefaultLayout() {
     const theme = useTheme();
+    console.log(theme.palette.mode)
     const [open, setOpen] = React.useState(false);
-
+    const colorMode = React.useContext(ColorModeContext);
     const handleDrawerOpen = () => {
         setOpen(true);
     };
@@ -109,7 +114,7 @@ export default function DefaultLayout() {
     return (
         <Box sx={{ display: 'flex' }}>
             <CssBaseline />
-            <AppBar position="fixed" open={open} sx={{ background: projectColors.primary }}>
+            <AppBar position="fixed" open={open} sx={{ background: theme.palette.background.default }}>
                 <Toolbar>
                     <IconButton
                         color="inherit"
@@ -122,11 +127,16 @@ export default function DefaultLayout() {
                         }}
                     >
 
-                        <MenuIcon />
+                        <MenuIcon sx={{ color: theme.palette.text.primary }} />
                     </IconButton>
 
                     <Box sx={{ display: 'flex', justifyContent: 'flex-end', width: '100%' }} >
+
+                        <IconButton sx={{ ml: 1 }} onClick={colorMode.toggleColorMode} >
+                            {theme.palette.mode === 'dark' ? <LightModeOutlined /> : <DarkModeOutlined />}
+                        </IconButton>
                         <AccountMenu />
+
                     </Box>
 
                 </Toolbar>
@@ -137,13 +147,38 @@ export default function DefaultLayout() {
                         Logo
                     </Typography>
                     <IconButton onClick={handleDrawerClose}>
-                        {theme.direction === 'rtl' ? <ChevronRightIcon /> : <ChevronLeftIcon />}
+                        {theme.direction === 'rtl' ? <ChevronRightIcon sx={{ bgcolor: colors.green[900] }} /> : <ChevronLeftIcon />}
                     </IconButton>
                 </DrawerHeader>
                 <Divider />
                 <List>
-                    {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
-                        <ListItem key={text} disablePadding sx={{ display: 'block' }}>
+                    {[
+                        {
+                            title: "Inbox",
+                            route: "/home",
+                            icon: <div>dlkfj</div>,
+                            children: [
+
+                            ]
+                        },
+                        {
+                            title: "Inbox",
+                            route: "/home",
+                            icon: <div>dlkfj</div>,
+                            children: [
+
+                            ]
+                        },
+                        {
+                            title: "Inbox",
+                            route: "/home",
+                            icon: <div>dlkfj</div>,
+                            children: [
+
+                            ]
+                        }
+                    ].map((item, index) => (
+                        <ListItem key={item.title} disablePadding sx={{ display: 'block' }}>
                             <ListItemButton
                                 sx={{
                                     minHeight: 48,
@@ -160,7 +195,7 @@ export default function DefaultLayout() {
                                 >
                                     {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
                                 </ListItemIcon>
-                                <ListItemText primary={text} sx={{ opacity: open ? 1 : 0 }} />
+                                <ListItemText primary={item.title} sx={{ opacity: open ? 1 : 0 }} />
                             </ListItemButton>
                         </ListItem>
                     ))}
@@ -199,3 +234,5 @@ export default function DefaultLayout() {
         </Box>
     );
 }
+
+export default DefaultLayout;
