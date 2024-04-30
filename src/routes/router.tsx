@@ -1,6 +1,7 @@
 import { createBrowserRouter } from "react-router-dom";
 import DefaultLayout from "../layout/DefaultLayout";
 import SignIn from "../pages/sign-in/SignIn";
+import Home from "../pages/home/home";
 const router = createBrowserRouter([
     {
         path: "/",
@@ -8,8 +9,8 @@ const router = createBrowserRouter([
         //   loader: rootLoader,
         children: [
             {
-                path: "home",
-                element: <DefaultLayout />,
+                path: "",
+                element: <Home />,
                 //   loader: teamLoader,
             },
 

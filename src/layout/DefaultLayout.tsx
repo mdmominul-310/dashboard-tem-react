@@ -14,17 +14,13 @@ import MenuIcon from '@mui/icons-material/Menu';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import ListItem from '@mui/material/ListItem';
-import ListItemButton from '@mui/material/ListItemButton';
-import ListItemIcon from '@mui/material/ListItemIcon';
-import ListItemText from '@mui/material/ListItemText';
-import InboxIcon from '@mui/icons-material/MoveToInbox';
-import MailIcon from '@mui/icons-material/Mail';
-
 import AccountMenu from '../component/dashhboar-headers/AccountMenu';
 import { Outlet } from 'react-router-dom';
 import { DarkModeOutlined, LightModeOutlined } from '@mui/icons-material';
 import { ColorModeContext } from '../App';
 import { colors } from '@mui/material';
+import DashboardSidebar from '../component/dashboard-sidebar/dashboard-sidebar';
+import sideBarItems from '../component/dashboard-sidebar/sidebar-items';
 
 
 const drawerWidth = 240;
@@ -100,7 +96,6 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
 
 function DefaultLayout() {
     const theme = useTheme();
-    console.log(theme.palette.mode)
     const [open, setOpen] = React.useState(false);
     const colorMode = React.useContext(ColorModeContext);
     const handleDrawerOpen = () => {
@@ -152,79 +147,13 @@ function DefaultLayout() {
                 </DrawerHeader>
                 <Divider />
                 <List>
-                    {[
-                        {
-                            title: "Inbox",
-                            route: "/home",
-                            icon: <div>dlkfj</div>,
-                            children: [
-
-                            ]
-                        },
-                        {
-                            title: "Inbox",
-                            route: "/home",
-                            icon: <div>dlkfj</div>,
-                            children: [
-
-                            ]
-                        },
-                        {
-                            title: "Inbox",
-                            route: "/home",
-                            icon: <div>dlkfj</div>,
-                            children: [
-
-                            ]
-                        }
-                    ].map((item, index) => (
+                    {sideBarItems?.map((item, index) => (
                         <ListItem key={item.title} disablePadding sx={{ display: 'block' }}>
-                            <ListItemButton
-                                sx={{
-                                    minHeight: 48,
-                                    justifyContent: open ? 'initial' : 'center',
-                                    px: 2.5,
-                                }}
-                            >
-                                <ListItemIcon
-                                    sx={{
-                                        minWidth: 0,
-                                        mr: open ? 3 : 'auto',
-                                        justifyContent: 'center',
-                                    }}
-                                >
-                                    {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-                                </ListItemIcon>
-                                <ListItemText primary={item.title} sx={{ opacity: open ? 1 : 0 }} />
-                            </ListItemButton>
+                            <DashboardSidebar open={open} item={item} key={index} />
                         </ListItem>
                     ))}
                 </List>
-                <Divider />
-                <List>
-                    {['All mail', 'Trash', 'Spam'].map((text, index) => (
-                        <ListItem key={text} disablePadding sx={{ display: 'block' }}>
-                            <ListItemButton
-                                sx={{
-                                    minHeight: 48,
-                                    justifyContent: open ? 'initial' : 'center',
-                                    px: 2.5,
-                                }}
-                            >
-                                <ListItemIcon
-                                    sx={{
-                                        minWidth: 0,
-                                        mr: open ? 3 : 'auto',
-                                        justifyContent: 'center',
-                                    }}
-                                >
-                                    {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-                                </ListItemIcon>
-                                <ListItemText primary={text} sx={{ opacity: open ? 1 : 0 }} />
-                            </ListItemButton>
-                        </ListItem>
-                    ))}
-                </List>
+
             </Drawer>
             <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
                 <DrawerHeader />
