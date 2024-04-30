@@ -7,7 +7,6 @@ import TextField from '@mui/material/TextField';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
 import Link from '@mui/material/Link';
-import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
@@ -47,6 +46,7 @@ export default function SignIn() {
                 justifyContent: 'center',
                 alignItems: 'center',
                 width: '100vw',
+                height: '100vh',
             }}>
                 <Container component="main" maxWidth="xs">
                     <CssBaseline />
@@ -97,7 +97,7 @@ export default function SignIn() {
                             >
                                 Sign In
                             </Button>
-                            <Grid container>
+                            {/* <Grid container>
                                 <Grid item xs>
                                     <Link href="#" variant="body2">
                                         Forgot password?
@@ -108,7 +108,7 @@ export default function SignIn() {
                                         {"Don't have an account? Sign Up"}
                                     </Link>
                                 </Grid>
-                            </Grid>
+                            </Grid> */}
                         </Box>
                     </Box>
                     <Copyright sx={{ mt: 8, mb: 4 }} />
