@@ -23,7 +23,7 @@ import DashboardSidebar from '../component/dashboard-sidebar/dashboard-sidebar';
 import sideBarItems from '../component/dashboard-sidebar/sidebar-items';
 
 
-const drawerWidth = 240;
+const drawerWidth = 280;
 
 const openedMixin = (theme: Theme): CSSObject => ({
     width: drawerWidth,
@@ -96,7 +96,7 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
 
 function DefaultLayout() {
     const theme = useTheme();
-    const [open, setOpen] = React.useState(false);
+    const [open, setOpen] = React.useState(true);
     const colorMode = React.useContext(ColorModeContext);
     const handleDrawerOpen = () => {
         setOpen(true);
@@ -157,7 +157,6 @@ function DefaultLayout() {
             </Drawer>
             <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
                 <DrawerHeader />
-
                 <Outlet />
             </Box>
         </Box>

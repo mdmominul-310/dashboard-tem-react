@@ -1,5 +1,5 @@
 import { ExpandMore } from "@mui/icons-material";
-import { Accordion, AccordionDetails, AccordionSummary, Box, ListItemButton, ListItemIcon, ListItemText } from "@mui/material";
+import { Accordion, AccordionDetails, AccordionSummary, Box, ListItemButton, ListItemIcon, ListItemText, colors, useTheme } from "@mui/material";
 
 type IItem = {
     title: string,
@@ -12,6 +12,7 @@ interface ItemProps extends IItem {
 }
 
 const DashboardSidebar = ({ open, item }: { open: boolean, item: ItemProps }) => {
+    const theme = useTheme();
     return (
         <>
             {
@@ -22,11 +23,19 @@ const DashboardSidebar = ({ open, item }: { open: boolean, item: ItemProps }) =>
                                 minHeight: 48,
                                 justifyContent: open ? 'initial' : 'center',
                                 px: 2.5,
-                            }}>
+                                boxShadow: 'none',
+                                backgroundImage: 'none',
+                                ":hover": {
+                                    backgroundColor: theme.palette.mode === 'dark' ? colors.grey[900] : colors.grey[100],
+                                },
+                            }}
+
+                            >
                                 <AccordionSummary
                                     expandIcon={<ExpandMore />}
                                     aria-controls="panel1-content"
                                     id="panel1-header"
+
 
 
                                 >
@@ -51,7 +60,6 @@ const DashboardSidebar = ({ open, item }: { open: boolean, item: ItemProps }) =>
                                                 sx={{
                                                     minHeight: 48,
                                                     justifyContent: open ? 'initial' : 'center',
-                                                    px: 2.5,
                                                 }}
                                             >
                                                 <ListItemIcon
@@ -69,25 +77,27 @@ const DashboardSidebar = ({ open, item }: { open: boolean, item: ItemProps }) =>
                                     }
                                 </AccordionDetails>
                             </Accordion> :
-                                <ListItemButton
-                                    sx={{
-                                        minHeight: 48,
-                                        justifyContent: open ? 'initial' : 'center',
-                                        px: 2.5,
-                                    }}
-                                >
-                                    <ListItemIcon
+                                <>
+                                    <ListItemButton
                                         sx={{
-                                            minWidth: 0,
-                                            mr: open ? 3 : 'auto',
-                                            justifyContent: 'center',
+                                            minHeight: 48,
+                                            justifyContent: open ? 'initial' : 'center',
+                                            px: 2.5,
+
                                         }}
                                     >
-                                        {/* {index % 2 === 0 ? <InboxIcon /> : <MailIcon />} */}
-                                        {item?.icon}
-                                    </ListItemIcon>
-                                    <ListItemText primary={item.title} sx={{ opacity: open ? 1 : 0 }} />
-                                </ListItemButton>
+                                        <ListItemIcon
+                                            sx={{
+                                                minWidth: 0,
+                                                mr: open ? 3 : 'auto',
+                                                justifyContent: 'center',
+                                            }}
+                                        >
+                                            {item?.icon}
+                                        </ListItemIcon>
+                                        <ListItemText primary={item.title} sx={{ opacity: open ? 1 : 0 }} />
+                                    </ListItemButton>
+                                </>
                         }
                     </>
                 ) : (
@@ -96,7 +106,7 @@ const DashboardSidebar = ({ open, item }: { open: boolean, item: ItemProps }) =>
                             sx={{
                                 minHeight: 48,
                                 justifyContent: open ? 'initial' : 'center',
-                                px: 5,
+                                px: open ? 5 : 2.5,
                             }}
                         >
                             <ListItemIcon

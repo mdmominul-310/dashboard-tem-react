@@ -1,4 +1,4 @@
-import { Dashboard } from "@mui/icons-material";
+import { Dashboard, ShoppingBag } from "@mui/icons-material";
 
 const sideBarItems = [
     {
@@ -8,21 +8,18 @@ const sideBarItems = [
         children: []
     },
     {
-        title: "Inbox",
+        title: "Products",
         route: "/home",
-        icon: <div>dlkfj</div>,
+        icon: <ShoppingBag />,
         children: [
-
+            {
+                title: "Dashboard",
+                route: "/home",
+                icon: <Dashboard />,
+            }
         ]
     },
-    {
-        title: "Inbox",
-        route: "/home",
-        icon: <div>dlkfj</div>,
-        children: [
 
-        ]
-    }
 ]
 
 export default sideBarItems;
