@@ -1,26 +1,17 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { RouterProvider } from 'react-router-dom'
 import router from './routes/router'
 import { ThemeProvider, createTheme } from '@mui/material/styles';
-
-
-export const ColorModeContext = React.createContext({
-  toggleColorMode: () => {
-
-  }
-});
+import { useAppSelector } from './store/app/hooks';
 
 function App() {
   const [mode, setMode] = React.useState<'light' | 'dark'>('light');
-  const colorCon = React.useContext(ColorModeContext);
-
-
-  React.useMemo(() => {
-    colorCon.toggleColorMode = () => {
-      setMode((prevMode) => (prevMode === 'light' ? 'dark' : 'light'));
+  const themeValue = useAppSelector(state => state.local.theme);
+  useEffect(() => {
+    if (themeValue.theme !== mode) {
+      setMode(themeValue?.theme as 'light' | 'dark');
     }
-  }, [])
-
+  }, [mode, themeValue])
 
   const theme = React.useMemo(
     () =>
@@ -38,7 +29,6 @@ function App() {
         <RouterProvider router={router}>
         </RouterProvider>
       </ThemeProvider>
-
     </>
   )
 }

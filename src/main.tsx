@@ -6,11 +6,21 @@ import '@fontsource/roboto/300.css';
 import '@fontsource/roboto/400.css';
 import '@fontsource/roboto/500.css';
 import '@fontsource/roboto/700.css';
+import { PersistGate } from 'redux-persist/integration/react';
+import { persist, store } from './store/app/store.ts';
+import { Provider } from 'react-redux';
 
 
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
-    <App />
+    <Provider store={store}>
+      <PersistGate persistor={persist}>
+        <App />
+      </PersistGate>
+    </Provider>
+
+
+
   </React.StrictMode>,
 )

@@ -17,10 +17,11 @@ import ListItem from '@mui/material/ListItem';
 import AccountMenu from '../component/dashhboar-headers/AccountMenu';
 import { Outlet } from 'react-router-dom';
 import { DarkModeOutlined, LightModeOutlined } from '@mui/icons-material';
-import { ColorModeContext } from '../App';
 import { colors } from '@mui/material';
 import DashboardSidebar from '../component/dashboard-sidebar/dashboard-sidebar';
 import sideBarItems from '../component/dashboard-sidebar/sidebar-items';
+import { useAppDispatch } from '../store/app/hooks';
+import { setTheme } from '../store/features/themeSlice';
 
 
 const drawerWidth = 280;
@@ -97,7 +98,6 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
 function DefaultLayout() {
     const theme = useTheme();
     const [open, setOpen] = React.useState(true);
-    const colorMode = React.useContext(ColorModeContext);
     const handleDrawerOpen = () => {
         setOpen(true);
     };
@@ -105,6 +105,13 @@ function DefaultLayout() {
     const handleDrawerClose = () => {
         setOpen(false);
     };
+
+    const dispatch = useAppDispatch();
+
+    const handleThemeChange = () => {
+        dispatch(setTheme(theme.palette.mode === 'dark' ? 'light' : 'dark'));
+    }
+
 
     return (
         <Box sx={{ display: 'flex' }}>
@@ -127,7 +134,7 @@ function DefaultLayout() {
 
                     <Box sx={{ display: 'flex', justifyContent: 'flex-end', width: '100%' }} >
 
-                        <IconButton sx={{ ml: 1 }} onClick={colorMode.toggleColorMode} >
+                        <IconButton sx={{ ml: 1 }} onClick={handleThemeChange} >
                             {theme.palette.mode === 'dark' ? <LightModeOutlined /> : <DarkModeOutlined />}
                         </IconButton>
                         <AccountMenu />
