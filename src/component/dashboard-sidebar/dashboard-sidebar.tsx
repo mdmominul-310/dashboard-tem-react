@@ -1,5 +1,6 @@
 import { ExpandMore } from "@mui/icons-material";
 import { Accordion, AccordionDetails, AccordionSummary, Box, ListItemButton, ListItemIcon, ListItemText, colors, useTheme } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 
 type IItem = {
     title: string,
@@ -13,6 +14,11 @@ interface ItemProps extends IItem {
 
 const DashboardSidebar = ({ open, item }: { open: boolean, item: ItemProps }) => {
     const theme = useTheme();
+    const navigate = useNavigate();
+    const handleNavigation = (route: string) => {
+        // navigate to route
+        navigate(route);
+    }
     return (
         <>
             {
@@ -57,6 +63,7 @@ const DashboardSidebar = ({ open, item }: { open: boolean, item: ItemProps }) =>
                                         item?.children?.map((child, index) => (
                                             <ListItemButton
                                                 key={index}
+                                                onClick={() => handleNavigation(child.route)}
                                                 sx={{
                                                     minHeight: 48,
                                                     justifyContent: open ? 'initial' : 'center',
